@@ -28,13 +28,21 @@ struct linked* insert_front(int x){
   return node;
 }
 void print_list(){
-    struct linked *start = head;
-    while(start != NULL)
-    {
-        printf(" [%d] \n", start->val);
-        start = start->next;
-    }
-    return;
+  struct linked *start = head;
+  while(start != NULL){
+    printf("[%d] \n", start->val);
+    start = start->next;
+  }
+  return;
+}
+void free_list(){
+  struct linked *start = head;
+  struct linked *next = start->next;
+  while(start != NULL){
+    free(start);
+    start = next;
+    next = start->next;
+  }
 }
 int main(){
   int i = 0;
@@ -43,15 +51,12 @@ int main(){
   }
   print_list(); /*it works!!!
  [9]
-
  [8]
-
  [7]
-
  [6]
-
  [5]
-
  [5]
+ */
+ free_list();
   return 0;
 }
